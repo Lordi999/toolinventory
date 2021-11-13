@@ -2,6 +2,7 @@ package tech.stenger.toolinventory.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.stenger.toolinventory.enumeration.Type;
 import tech.stenger.toolinventory.exception.UserNotFoundException;
 import tech.stenger.toolinventory.model.XTool;
 import tech.stenger.toolinventory.repo.XToolRepo;
@@ -38,4 +39,8 @@ public class XToolService {
         ToolRepo.deleteXToolById(pId);
     }
 
+    public List<XTool> findXToolByType(Type type) {
+        return ToolRepo.findXToolByType(type)
+                .orElseThrow(() -> new UserNotFoundException("Tool by type " + type + " could not be found"));
+    }
 }

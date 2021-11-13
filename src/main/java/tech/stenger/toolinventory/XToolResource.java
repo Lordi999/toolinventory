@@ -3,6 +3,7 @@ package tech.stenger.toolinventory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tech.stenger.toolinventory.enumeration.Type;
 import tech.stenger.toolinventory.model.XTool;
 import tech.stenger.toolinventory.service.XToolService;
 
@@ -28,6 +29,12 @@ public class XToolResource {
     public ResponseEntity<XTool> getToolById(@PathVariable("id") long id){
         XTool tool = toolService.findXToolById(id);
         return new ResponseEntity<>(tool, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/type/{type}")
+    public ResponseEntity<List<XTool>> getToolByType(@PathVariable("type") Type type){
+        List<XTool> tools = toolService.findXToolByType(type);
+        return new ResponseEntity<>(tools, HttpStatus.OK);
     }
 
     @PostMapping("/add")
